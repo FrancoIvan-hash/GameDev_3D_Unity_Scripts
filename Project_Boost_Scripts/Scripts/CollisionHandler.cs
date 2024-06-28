@@ -63,6 +63,7 @@ public class CollisionHandler : MonoBehaviour
     void ReloadLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex; // current level
+        DestroyRocket();
         SceneManager.LoadScene(currentSceneIndex); // reload current scene
     }
 
@@ -87,7 +88,7 @@ public class CollisionHandler : MonoBehaviour
         Movement movement = GetComponent<Movement>();// get Movement script on Player
         movement.enabled = false; // freeze rocket movement
         //rb.isKinematic = true;
-        Invoke("ReloadLevel", levelLoadDelay); // reload current level after some delay
+        Invoke(nameof(ReloadLevel), levelLoadDelay); // reload current level after some delay
         //ReloadLevel(); // reload the level after crashing
     }
 
@@ -106,6 +107,6 @@ public class CollisionHandler : MonoBehaviour
         successParticles.Play(); // play success particles
         Movement movement = GetComponent<Movement>(); // get Movement script on Player
         movement.enabled = false; // freeze rocket movement
-        Invoke("LoadNextLevel", levelLoadDelay); // load next level after some delay
+        Invoke(nameof(LoadNextLevel), levelLoadDelay); // load next level after some delay
     }
 }

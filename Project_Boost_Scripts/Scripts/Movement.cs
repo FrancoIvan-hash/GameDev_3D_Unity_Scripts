@@ -70,6 +70,7 @@ public class Movement : MonoBehaviour
         rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
         if (!rocketSound.isPlaying) // make sure sound isn't currently playing
             rocketSound.PlayOneShot(mainEngine); // play AudioSource
+                                                 // PlayOneShot(): 
 
         if (!mainEngineParticles.isPlaying) // make sure particles system isn't playing 
             mainEngineParticles.Play(); // play the main engine particle system
@@ -113,7 +114,7 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(float rotationThisFrame)
     {
-        // add constraints so physics system doesn't cause a bug
+        // add constraints so physics system doesn't cause a bug when hitting obstacles
         rb.freezeRotation = true; // freezing rotation so we can manually rotate
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
         rb.freezeRotation = false; // unfreeze rotation so the physics system can take over
