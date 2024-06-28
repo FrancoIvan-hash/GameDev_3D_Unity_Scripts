@@ -18,6 +18,7 @@ public class Oscillator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Mathf.Epsilon is the smallest decimal number in Unity
         if (period <= Mathf.Epsilon) return; // make sure we don't divide cycles by 0
 
         float cycles = Time.time / period; // continually growing over time
