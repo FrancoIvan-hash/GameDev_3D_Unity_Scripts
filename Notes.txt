@@ -169,3 +169,130 @@ How To Build and Publish A Game:
 - sharemygame.com
 ---> a website hosted by GameDev.tv
 
+ARGON ASSAULT
+
+Argon Assault Game Design:
+- Player Experience:
+--- chaos
+- Core Mechanic:
+---> dodge and shoot
+- Core game loop:
+---> get as far as possible without dying in order to get the highest score possible
+---> start over when dying
+
+Game Theme:
+- you must save your planet, Argon, from destruction by an invading force
+
+Features - in priority
+- camera rail
+---> path through the level that the camera follows
+- player movement
+---> horizontal and vertical movement
+- health
+---> enemies have health that depletes when shot
+- enemy paths
+---> enemies should travel on paths and be hand placed by the designer
+- score
+---> points are given for killing enemies
+- game loop
+---> upon dying, player restarts the level
+
+Other features you can consider
+- multiple levels
+---> finish a level and load the next
+- player shield
+---> when damaged, the player's shield depletes
+- pickups 
+---> flying over a shield pickup will increase the player's shields
+- momentary invulnerability
+---> after taking damage, the player cannot take damage gain for X time
+- weapon upgrades
+---> flying over a pickup could increase weapon damage
+
+How to add Terrain
+- keys for terrain
+---> [ decrease brush size
+---> ] increase brush size
+- opacity: how much terrain is raised
+
+Texturing Terrain in Unity
+- Paint texture
+---> layers
+------> add layers
+- Bump Map
+---> texture with information on how light catches a shape
+- Height map
+---> uses white-to-black scale to show height
+- Normal map
+---> uses RGB values to indicate x, y, z facing direction (for light)
+
+Master Timeline For Player Rail
+- Window >> Sequencing >> Timeline
+- Window >> Animation
+- Create Empty Game Object (Master Timeline)
+---> select it and click on create button in Timeline window
+- On Master Timeline (Timeline window)
+---> on left side, click on the + icon (top left) and add an Animation Track
+---> key frame (just move gameObject up and down a bit to create it at the start)
+---> move to desired next stop using RMB and WASD and press ctrl+shift+F (align with view)
+-----> make sure you align with view while selecting gameObject
+
+Animate Enemy Using Timeline
+- use curves to change rotation or position of the animated game object
+
+Using GetAxis() For Movement
+- Input Manager: old input system
+- Input System: new input system
+
+Mathf.Clamp() To Constraint Movement:
+- Params: (value, min, max)
+- SHORTCUT: F2 to rename a highlighted variable (will change name every variable)
+
+How To Set Local Position
+- Roll axis
+---> rotate z-axis
+---> looks like it's moving to the right or left
+- Pitch axis
+---> rotate x-axis
+---> looks like it's going up or down
+- Yaw axis
+---> rotate y-axis
+---> pointing its nose to the right or left
+- rotate y-axis before rotating another axis so that the other values aren't affected
+- Quaternion.Euler(x, y, z)
+---> (pitch, yaw, roll)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
