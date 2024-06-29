@@ -1,0 +1,171 @@
+MOBILE COURSES DURATION:
+- Ball Launcher: 1h 24m       (1h 30m) --> DONE
+- Simple Driving: 1h 54m 50s  (2h)     --> IN-PROGRESS
+- Asteroid Avoider: 2h 7m 17s (2h 10m)
+
+Project Setup:
+- Install 
+--> Device Simulator (enable preview in project settings)
+--> Input System
+- Get Device Simulator from Window > General > Device Simulator
+- Enable click to simulate touch by:
+--> Window > Analysis > Input Debugger > Options > Simulate Touch Input from Mouse or Pen
+
+BALL LAUNCHER GAME
+
+Key terminology:
+- Renderer: allows us to see our sprite / art
+- Collider: invisible shape that Unity uses for physics collisions
+- RigidBody: allows the object to receive forces and to be influenced by gravity
+
+World and Screen Space
+- Screen Space: touch position in terms of pixels on your Screen
+- World Space: position in terms of units inside the game World
+
+iOS Dev in MacOS 
+- steps to fix Shell Script error in Xcode:
+--> terminal command: chmod +x +MapFileParser.sh 
+- permissions on iPhone:
+--> Settings -> General -> Device Management -> Trust dev app
+
+SIMPLE DRIVING GAME
+
+Guidelines for making a track:
+- start with big picture decisions
+--> size of the track
+--> shape of corners/turns
+--> speed and turning vehicle
+- loosely block out the shape and layout of your track
+- tweak the challenge parts of your track
+- make it look nicer more organized
+
+ASTEROID AVOIDER GAME
+
+Spaceship Movement:
+- Update vs FixedUpdate
+--> Update is called every frame (great for taking input)
+--> FixedUpdate is called every time the physics system updates which is less than Update
+------> Don't want to do physics update every frame because they are expensive
+--> Update's call frequency changes based on how well the game is running
+--> FixedUpdate's call frequency stays consistent regardless of the game's performance
+
+Screen Wraparound:
+- Viewport Positions
+--> (0, 1) top left of screen
+--> (0, 0) bottom left of screen
+--> (1, 1) top right of screen
+--> (1, 0) bottom right of screen
+--> (0.5, 0.5) - middle of screen
+
+Spaceship Rotation:
+- Quaternion
+--> need to learn about Quaternion
+
+Implementing Ads:
+- Singletons:
+--> Positive:
+-----> easily accessible from anywhere
+-----> only one instance
+--> Negatives:
+-----> can't be inherited
+-----> can cause many issues if used incorrectly
+
+COMPLETE UNITY 3D DEV COURSES:
+- Obstacle Course (DONE)
+- Project Boost (DONE)
+- Argon Assault (7h 10m 2s) ---> 7h 10m
+- Realm Rush (7h 8m 24s)    ---> 7h 10m	
+- Zombie Runner (7h 22m 25s)---> 7h 20m
+
+OBSTACLE COURSE
+- done
+
+PROJECT BOOST
+
+Basic Input Binding:
+- ctrl + shift + space: get signature options for a class
+
+Using AddRelativeForce():
+- add force relative to game object
+
+Transform.Rotate() Our Rocket:
+- ctrl + . : Extract Method
+---> creates a method (asks for name) when highlighting over a piece of code in VS Code (press keys above)
+
+Our Source Control Repo:
+- Some terminology:
+---> Source Control: a system for tracking and managing changes to your code
+---> Git: a type of version control system that tracks changes to files
+---> Gitlab (also, GitHub): repository hosting service
+---> Repository (Repo): directory or storage space for your project
+---> SourceTree: desktop client to help view your repo
+
+Unity Audio Introduction:
+- 3 Main things we need
+---> Audio Listener: to hear the audio
+------> Audio Source: to play the audio
+---------> Audio File: the sounds that get played
+- Main camera: default audio listener
+- audio source is attached to game object that generates a sound
+
+Play AudioSource SFX:
+- AudioSource: type -> Audio Source
+---> AudioSource audioSource: audioSource.Play() --> fine if it's only one clip attached to Audio Source
+
+Respawn Using SceneManager:
+- Get current scene index (integer value): SceneManager.GetActiveScene().buildIndex
+- load/reload a scene: SceneManager.LoadScene(sceneIndexInt or sceneNameString)
+---> nameof(MethodName): use this function instead of using a string to Invoke a method
+
+Load Next Level:
+- SceneManager.sceneCountInBuildSettings: returns the total number of scenes in your world
+
+Multiple Audio Clips:
+- AudioSource.PlayOneShot(AudioClip clip, float volumeScale)
+---> this function lets you play a specific sound when you have multiple attached to an audio source
+
+How to add lights in Unity:
+- Main Directional Light: Sun
+- Environment Lighting
+- Scene Lights
+---> Spotlights
+------> light is only in one direction
+---> Pointlights
+------> kind of light a lamp light
+
+Move Obstacle with Code:
+- [SerializeField] [Range(0,1)] float movementFactor;
+---> makes it available in the editor, and makes it a slider
+
+Mathf.Sin() For Oscillation:
+- tau = 2*PI
+- period = 2
+- cycle = Time * time / period
+
+Protect Against NaN Error:
+- might cause errors when playing the game
+- avoid by using:
+---> return if period == 0: but floating point comparison might not be exact
+---> Mathf.Epsilon: the smallest floating point number
+
+Designing Level Moments:
+- Useful Game Design Approach:
+---> Design "moments" and then expand them into a level. Moments that use the environment:
+------> Fly under
+------> Fly over
+------> Fly through a gap
+------> Time your flight through moving obstacle
+------> Land on moving platform
+------> Fly through narrow tunnel
+---> Moments that use tuning of our existing game:
+------> slower rocket (it got damaged)
+------> faster rocket (got a boost)
+------> darker level
+------> closer camera
+------> bigger rocket (carrying something)
+------> reversed controls
+
+How To Build and Publish A Game:
+- sharemygame.com
+---> a website hosted by GameDev.tv
+
