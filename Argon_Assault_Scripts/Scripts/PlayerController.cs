@@ -6,13 +6,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // [SerializeField] InputAction movement;
-    [SerializeField] private float controlSpeed = 15f;
-    [SerializeField] private float xRange = 2f;
-    [SerializeField] private float yRange = 3f;
-    [SerializeField] private float positionPitchFactor = -8f;
-    [SerializeField] private float controlPitchFactor = -20f;
-    [SerializeField] private float positionYawFactor = 10f;
-    [SerializeField] private float controlRollFactor = -40f;
+    [Header("General Setup Settings")]
+    [Tooltip("How fast ship moves up/down")]
+    [SerializeField] private float controlSpeed = 20f;
+    [Tooltip("How far player moves horizontally")]
+    [SerializeField] private float xRange = 7f;
+    [Tooltip("How far player moves vertically")]
+    [SerializeField] private float yRange = 5f;
+
+    [Header("Laser gun array")]
+    [Tooltip("Add all player lasers")][SerializeField] private GameObject[] lasers;
+
+    [Header("Screen position based tuning")]
+    [SerializeField] private float positionPitchFactor = -5f;
+    [SerializeField] private float positionYawFactor = 7f;
+
+    [Header("Player input based tuning")]
+    [SerializeField] private float controlPitchFactor = -14f;
+    [SerializeField] private float controlRollFactor = -28f;
 
 
     private float xThrow;
@@ -27,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         ProcessTranslation();
         ProcessRotation();
+        ProcessFiring();
     }
 
     private void ProcessTranslation()
@@ -57,6 +69,33 @@ public class PlayerController : MonoBehaviour
         float yaw = transform.localPosition.x * positionYawFactor;
         float roll = xThrow * controlRollFactor;
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    private void ProcessFiring()
+    {
+        // if pushing fire button
+        // then print "shooting"
+        // else don't print "shooting"
+        if (Input.GetButton("Fire1"))
+        {
+            SetLasersActive(true);
+        }
+        else
+        {
+            SetLasersActive(false);
+        }
+    }
+
+    private void SetLasersActive(bool isActive)
+    {
+        // for each of the lasers we have, turn them on
+        foreach (GameObject laser in lasers)
+        {
+            // laser.SetActive(true);
+            ParticleSystem ps = laser.GetComponent<ParticleSystem>();
+            var em = ps.emission;
+            em.enabled = isActive;
+        }
     }
 }
 /*

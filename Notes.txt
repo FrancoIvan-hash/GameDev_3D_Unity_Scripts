@@ -262,7 +262,38 @@ How To Set Local Position
 - Quaternion.Euler(x, y, z)
 ---> (pitch, yaw, roll)
 
+Exploring Nested Prefabs in Unity
+- Cyclic nesting detected
+---> cannot have a prefab be a child of itself
+---> can have instances
+- Golden rule
+---> don't have scaling at your parent level if you can get away with not scaling
+- the scaling of the parent gets applied to the children
+- to make changes, go straight to the prefabs
 
+Arrays and Foreach Loops:
+- arrays store many "boxes" of the same type
+- Foreach loop:
+---> control flow statement for traversing a collection
+---> it's a way of saying "do this to everything in our collection"
+---> how to iterate over a collection
+------> foreach (ObjectType item in things) { item.DoSomething(); }
+- SetActive(Boolean) vs .enabled:
+---> SetActive method is to activate and deactivate a gameObject
+---> enabled property (.enabled) is to enable and disable a component on a gameObject
+- GameObject vs gameObject
+---> gameObject refersto the GameObject that the current script is attached to
+---> GameObject refers to an object type
+
+Header and Tooltips Attributes:
+- [Header("some description")
+---> group variables together in editor until next Header
+- [Tooltip("some description")] 
+---> adds a description to a single variable 
+
+Understanding Collisions and Triggers:
+- string interpolation
+---> $"{someVariable} someString"
 
 
 
