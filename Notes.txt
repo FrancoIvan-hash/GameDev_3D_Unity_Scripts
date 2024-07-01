@@ -295,8 +295,29 @@ Understanding Collisions and Triggers:
 - string interpolation
 ---> $"{someVariable} someString"
 
+Instantiate at Runtime
+- Quaternion.identity
+---> a way of saying we don't want rotation in an object
+- Instantiate()
+---> a way to instantiate something in the game world at runtime
+---> signature: (Object to instantiate, position to instantiate it at, rotation of instance)
 
+Public Methods in Unity C#
+- Encapsulating our code
+---> en-capsule-ating - putting in a capsule
+---> different parts of your code have a "need to know basis" level of access
+------> don't let everything access everything
+- FindObjectByType<ObjectType>();
+---> looks through our entire Unity project to find the type ObjectType
+---> in our game, we can use it since we don't have multiple similar ObjectType
+---> never use it in Update method, project expensive
 
+Set up Enemy Prefabs
+- AddComponent<ObjectType>();
+---> adds a component to a game object
+
+Using FindWithTag()
+- 
 
 
 
