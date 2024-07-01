@@ -17,8 +17,8 @@ public class CollisionHandler : MonoBehaviour
     private void StartCrashSequence()
     {
         crashVFX.Play();
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false; // to turn off meshrenderer but it doesn't work for my ship
+        GetComponent<BoxCollider>().enabled = false; // so that we don't collide anymore
         GetComponent<PlayerController>().enabled = false;
         Invoke(nameof(ReloadLevel), loadDelay);
     }
