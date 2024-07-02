@@ -1,0 +1,5 @@
+REALM RUSH
+
+Text Labels
+- using TextMeshPro to add coords to cubemesh
+- change font shader to TextMeshPro/Distance Field Overlay so that there are no errors rendering the text over the cube mesh 
