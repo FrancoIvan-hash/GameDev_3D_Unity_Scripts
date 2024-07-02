@@ -16,6 +16,8 @@ Coordinate System
 - UnityEditor.EditorSnapSettings
 ---> lets you access your settings that you made in the Grid and Snap settings
 ---> move.x (and move.z) gives you the amount of units you move to x or z axis
+- Application.isPlaying
+---> checks whether we're in playmode or not
 
 Lists
 - Lists vs Arrays in C#:
