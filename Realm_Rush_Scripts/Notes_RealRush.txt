@@ -3,3 +3,37 @@ REALM RUSH
 Text Labels
 - using TextMeshPro to add coords to cubemesh
 - change font shader to TextMeshPro/Distance Field Overlay so that there are no errors rendering the text over the cube mesh 
+
+Coordinate System
+- [ExecuteAlways]
+---> it lets a class excute in playmode and editmode
+- Vector2Int
+---> object type that stores a 2D value (x, y) using ints
+- Mathf.RountToInt()
+---> method that transforms a float to an int
+- transform.parent.postision
+---> we are using parent attr because our script is attached to a child and we're moving the whole thing (parent and children)
+- UnityEditor.EditorSnapSettings
+---> lets you access your settings that you made in the Grid and Snap settings
+---> move.x (and move.z) gives you the amount of units you move to x or z axis
+
+Lists
+- Lists vs Arrays in C#:
+--->			Array		List
+---> Collection Size :  Fixed		Variable
+---> Performance     :  Fast		Varies
+---> Ease of Use     :  Easy		Easy
+---> Flexibility     :  Low		High
+- List<ObjectType>
+---> init = new List<ObjectType>()
+
+Introducing Coroutines
+-> Invoke() is a coroutine
+-> InvokeRepeating(string MethodName, float time, float repeatRate)
+---> invokes MethodName in time seconds, then repeatedly every repeatRate seconds
+- IEnumerator
+---> return type to create/define a Coroutine
+---> yield return is used instead of just return in a Coroutine
+---> use WaitForSeconds(float time) to delay the Coroutine
+- StartCoroutine(MethodName())
+---> used to called a Coroutine 
