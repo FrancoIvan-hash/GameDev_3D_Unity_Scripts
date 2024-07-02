@@ -317,7 +317,13 @@ Set up Enemy Prefabs
 ---> adds a component to a game object
 
 Using FindWithTag()
-- 
+- finds an object using a tag
+
+Add Post-Processing
+- this is all about changing the environment
+---> boom, vignette, etc.
+- MAKE SURE I GO BACK TO THIS ONE FOR FUTURE REFERENCES/GAMES
+
 
 
 

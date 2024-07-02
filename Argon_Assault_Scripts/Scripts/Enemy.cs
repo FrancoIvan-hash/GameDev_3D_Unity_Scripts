@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private GameObject deathVFX;
+    [SerializeField] private GameObject deathFX;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private int increaseScoreByHit;
     [SerializeField] private int hitPoints = 2; // how much hits an enemy can take before exploding
@@ -38,19 +38,19 @@ public class Enemy : MonoBehaviour
         hitPoints--; // decrement the hitPoints ever particle collision
     }
 
-    private void PlayParticleSystem(GameObject particleSystem)
-    {
-        // Quaternion.identity is a way of saying we don't want any rotation
-        GameObject vfx = Instantiate(particleSystem, this.transform.position, Quaternion.identity);
-        // take all instances and organized them under parent GameObject/Transform (it's an empty gameObject)
-        vfx.transform.parent = parentGameObject.transform;
-    }
-
     private void KillEnemy()
     {
         // increase score
         scoreBoard.IncreaseScore(increaseScoreByHit);
-        PlayParticleSystem(deathVFX);
+        PlayParticleSystem(deathFX);
         Destroy(this.gameObject);
+    }
+
+    private void PlayParticleSystem(GameObject particleSystem)
+    {
+        // Quaternion.identity is a way of saying we don't want any rotation
+        GameObject fx = Instantiate(particleSystem, this.transform.position, Quaternion.identity);
+        // take all instances and organized them under parent GameObject/Transform (it's an empty gameObject)
+        fx.transform.parent = parentGameObject.transform;
     }
 }
