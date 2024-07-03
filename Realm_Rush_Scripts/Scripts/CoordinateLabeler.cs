@@ -6,12 +6,19 @@ using TMPro;
 [ExecuteAlways] // will execute in playmode and editmode
 public class CoordinateLabeler : MonoBehaviour
 {
+    [SerializeField] private Color defaultColor = Color.black;
+    [SerializeField] private Color blockedColor = Color.gray;
+
     private TextMeshPro label;
     Vector2Int coordinates = new Vector2Int(); // 2D coords using ints
+    Waypoint waypoint;
 
     private void Awake()
     {
         label = GetComponent<TextMeshPro>();
+        label.enabled = false;
+
+        waypoint = GetComponentInParent<Waypoint>(); // bc this script is attached to child
         DisplayCoordinates(); // to make sure we get our coords right in playmode
     }
     // Update is called once per frame
@@ -22,6 +29,9 @@ public class CoordinateLabeler : MonoBehaviour
             DisplayCoordinates();
             UpdateObjectName();
         }
+
+        ColorCoordinates();
+        ToggleLabels();
     }
 
     private void DisplayCoordinates()
@@ -37,5 +47,25 @@ public class CoordinateLabeler : MonoBehaviour
     {
         // we're naming our tiles corresponding to their coords
         transform.parent.name = coordinates.ToString();
+    }
+
+    private void ColorCoordinates()
+    {
+        if (waypoint.IsPlaceable)
+        {
+            label.color = defaultColor;
+        }
+        else
+        {
+            label.color = blockedColor;
+        }
+    }
+
+    private void ToggleLabels()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            label.enabled = !label.IsActive();
+        }
     }
 }
