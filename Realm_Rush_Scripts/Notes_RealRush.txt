@@ -38,4 +38,145 @@ Introducing Coroutines
 ---> yield return is used instead of just return in a Coroutine
 ---> use WaitForSeconds(float time) to delay the Coroutine
 - StartCoroutine(MethodName())
----> used to called a Coroutine 
+---> used to called a Coroutine
+
+Importing Assets
+- if you drag a prefab inside another prefab, it creates a nested prefab
+- if you change the nested prefab (original), then it changes everything 
+- make sure to unpack prefab in order for changes to the original prefab don't distribute
+
+Prefab Variants
+- Prefab hierarchy
+---> 			Prefab Parent
+-------> Prefab child     Prefab child      Prefab Child
+-------> where prefab child is a variant
+- if we change something in our parent prefab, it will be reflected on the children/variants unless we override some params
+- be mindful that scale might be bold/overriden so make sure to revert it (in the prefab variant) 
+
+Smooth Enemy Movement
+- LERP (Linear Interpolation)
+---> since we only have the starting and endpoints (no midpoints), linear interpolation will save the day
+---> Vector3.LERP(startPosition, endPosition, travelPercent)
+------> startPosition: our current waypoint
+------> endPosition: waypoint we're going to
+------> travelPercent: between zero and one
+- yield return new WaitForEndOfFrame() inside a while loop
+---> waits for the end of frame to start the while loop again
+- LookAt(Vector3 position)
+---> makes sure the gameobject is facing the position it's moving towards
+
+Detect Mouse Input
+- use built-int methods like OnMouseOver (detect hovering over) and OnMouseDown (detect click)
+---> can use Input.GetMouseButtonDown(param) to check if we have clicked somewhere)
+- can use transform.name and gameObject.name to get the name of the game object
+
+Instantiating Enemies
+- Instantiate(Object to instantiate, Transform parent)
+---> parent: where the object to instantiate gets parented under (becomes a child of)
+---> this is another signature for Instantiate() method
+
+Object Pools
+- creation and destruction of game objects is quite resource intensive
+- as game gets bigger, might cause performance issues
+- object pool:
+---> instantiates all of the game objects we will need and places them in the world as we need them
+---> once they are no longer needed, they aren't destroyed but put back to the object pool
+- OnEnable() built-in Unity method
+---> it's called whenever a game object is enabled in the hierarchy
+- activeSelf
+---> a property to check whether a game object is active or not
+- activeInHierarchy
+---> another property to check whether a gameobject is active in the hierarchy or not
+
+Target Closest Enemy:
+- Find Closest Target
+---> find every target in the scene
+---> compare distances to see which is closest
+- Mathf.Infinity
+---> biggest number represented in Unity
+- Vector3.Distance(currentPosition, targetPosition)
+---> returns a float
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
