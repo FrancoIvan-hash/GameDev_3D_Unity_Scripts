@@ -97,8 +97,49 @@ Target Closest Enemy:
 - Vector3.Distance(currentPosition, targetPosition)
 ---> returns a float
 
+Currency System (Part 1)
+- Bank of the Realm
+---> Tower will get money from the account
+---> everytime we kill an enemy, we will get money to our bank
+---> if an enemy escapes, they will steal money from our bank
+- Mathf.Abs(param)
+---> gets the absolute value of the param (if param is negative, returns positive value)
 
+Currency System (Part 2)
+- SceneManager.GetActiveScene()
+---> returns our current scene (Scene type)
+- buildIndex
+---> returns the index of the scene 
+---> SceneManager.GetActiveScene().buildIndex
 
+UI Text
+- TextMeshProUGUI
+---> this is an object type
+---> used when working with canvas elements
+
+Increasing Difficulty
+- [RequireComponent(typeof(ObjectType))]
+---> this is an attribute
+---> ensures that the ObjectType also gets attached to the gameObject when we attach this script
+
+Refactoring
+- path.Clear()
+---> path is a List<>
+---> Clear() clears the list path (makes it empty)
+- Application.isPlaying
+---> returns true if we're in playmode, false otherwise (editmode)
+- MOVE CoordinateLabeler.cs to Editor folder in Assets when building our game (making our build) so that it doesn't break
+---> it would break becasue we're using UnityEditor.EditorSnapSettings.move.x (.z)
+
+Playtest and Balance
+- change the gameworld
+---> add castles, make it bigger, etc.
+- change the balance of the game
+---> speed of the enemy
+---> how far the projectile from ballista goes (and how fast it shoots)
+---> also change the particle system from local to world so that the particle continues it's first path
+
+------------------ Second Half Of Course (New Design) ------------------------------------------------------------------------------------
 
 
 
