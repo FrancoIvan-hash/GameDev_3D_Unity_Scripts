@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private Tower towerPrefab;
     [SerializeField] private bool isPlaceable;
     public bool IsPlaceable { get { return isPlaceable; } } // this is a property of isPlaceable
 
@@ -12,8 +12,8 @@ public class Waypoint : MonoBehaviour
     {
         if (isPlaceable)
         {
-            Instantiate(towerPrefab, transform.position, Quaternion.identity);
-            isPlaceable = false; // make sure you can't place a tower on top of a tower
+            bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position); // returns true if tower placed
+            isPlaceable = !isPlaced; // make sure you can't place a tower on top of a tower
         }
     }
 }
