@@ -141,11 +141,89 @@ Playtest and Balance
 
 ------------------ Second Half Of Course (New Design) ------------------------------------------------------------------------------------
 
+Pathfinding Decisions
+- which algorithm is best?
+---> Breadth First Search (BFS)
+------> easiest of all algorithms
+------> with a few tweaks you can turn it into a Dijkstra algorithm
+---> Dijkstra
+---> A*
+- Search algorithms overview
+---> Algorithm		Always shortest path	movement costs	Multiple start or end points	Speed
+---> BFS			yes		  can't handle 		yes			medium
+---> Dijkstra			yes		  can handle 		yes			slow
+---> A*				tricky		  can handle		no			fast
+- BFS : picked algorithm that we will use for enemy pathfinding
 
+Breadth First Search (BFS)
+- Navigating a Graph
+---> a graph is a collection of nodes
+---> nodes are connected to each other by edges (lines)
+---> can think of nodes as towns or cities connected by roads (edges)
+---> we don't really need edges because BFS doesn't care about weight
+- start with our starting tile
+---> look at neighbors
+---> queue up these neighbors and look at the neighbors of the neighbors that haven't been explored
+---> we do this until we find our destination node (destination tile)
+- BFS gives you different shortest paths depending on how you start exploring the neighbors (which influences building the tree)
+- Instructions
+---> 1) choose your search direction (up to designer)
+---> 2) add the current node to the tree (at the start this is the starting node)
+---> 3) add the neighbors of the current node to the tree
+---> 4) move to the next node in the tree
+---> 5) if you're not at the goal, go to step 3
+---> 6) record your journey back up the tree
+---> 7) reverse the list to get the path in the correct order
 
+Pure C# Classes:
+- a pure C# class doesn't inherit from Monobehavior
+---> cannot add it to gameObjects 
+- [System.Serializable]
+---> makes a pure C# class be serializable
 
+Dictionaries
+- what are they?
+---> stores key-value pair
+---> keys link to values
+---> the keys must be unique, and are usually very simple
+---> the values can be more complex
+---> values can be null
+---> keys cannot be null
+---> the lookup is very fast from key to value
+---> the lookup is very slow from value to key
+- Dictionary<Key, Value> name = new Dictionary<Key, Value>();
+---> how you init a Dictionary
 
+More Debugging Tools
+- Dictionary.ContainsKey(dictionaryKey)
+---> this function returns true if the key is in the dict, false otherwise
+- new Color (float red, float blue, float green)
+---> can use between 0 and 1 in each color channel to efine a new color (if there isn't a built-in one)
 
+Exploring Neighbors
+- need to specify directions for BFS algorithm
+---> Vector2Int[] directions
+------> init this array with Vector2Int.right, left, up, and down for directions
+
+Exploring the World
+- Queues
+---> a special kind of list
+---> enforces a FIFO order (first in, first out)
+---> Queue<Node> queue
+---> queue.Enqueue() adds to end of queue
+---> queue.Dequeue() returns the front of the queue
+---> queue.Peek() look but don't touch (won't use it in our code)
+
+Finding the Path (again!)
+- need to add a Flow Field
+---> when we search through our neighbors, we keep track of where we came from and essentially add arrows to our map
+---> and when we reached our destination, we can connect these points backwards to our starting node
+---> then reverse this list
+- List<Node> path = ...
+---> path.Reverse() reverses the list
+
+Blocking Nodes
+- 
 
 
 
