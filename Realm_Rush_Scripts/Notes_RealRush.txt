@@ -223,7 +223,50 @@ Finding the Path (again!)
 ---> path.Reverse() reverses the list
 
 Blocking Nodes
+- added more colors to block path
+
+Valid Path
+- KeyValuePair<Vector2Int, Node> entry in grid
+---> where grid is a dictionary
+---> KeyValuePair makes entry useful to access the key-value in grid
+---> entry.Value to access the grid (of type GridManager) properties (connectedTo, isPath, etc.)
+
+Script Execution Order
+- we don't know which script is run first 
+- Edit >> Project Settings >> Script Execution Order
+---> we can edit the order in which our scripts are executed
+- BUG:
+---> when clicking on tile (of path to destination), the path gets redone even when no ballista is placed
+
+Broadcast Messages
+- on Unity Doc
+---> calls the method methodName on every MonoBehaviour in this game object or any of its children
+- like a parent shouting to their children dinner is ready and every children hears it
+- BroadcastMessage("MethodName", SendMessageOptions.DontRequireReceiver);
+---> sends a broadcast message to enemy to RecalculatePath (MethodName)
+---> second param: we don't care if anyone is listening, send it regardless (to not get errors)
+
+Overloading Methods
+- overloaded methods
+---> a type of polymorphism
+---> 'poly' = many
+---> 'morphism' = shapes
+---> methods can have the same name if they have different signatures
+- example
+---> Instantiate(object)
+---> Instantiate(object, position, rotation)
+- BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver)
+---> false: is the bool param that RecalculatePath takes
+- StopAllCoroutines()
+---> stops all coroutines 
+
+Ambience
+-
+
+Post Processing
 - 
+
+ZOMBIE RUNNER
 
 
 
