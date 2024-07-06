@@ -5,58 +5,64 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private List<Tile> path = new List<Tile>();
-
     [SerializeField][Range(0f, 5f)] private float speed = 1f;
 
-    private Enemy enemy;
+    private List<Node> path = new List<Node>();
 
-    private void Start()
+    private Enemy enemy;
+    private GridManager gridManager;
+    private PathFinder pathFinder;
+
+    private void Awake()
     {
         enemy = GetComponent<Enemy>();
+        gridManager = FindObjectOfType<GridManager>();
+        pathFinder = FindObjectOfType<PathFinder>();
     }
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        FindPath();
         ReturnToStart();
-        StartCoroutine(FollowPath());
+        RecalculatePath(true);
         // InvokeRepeating(nameof(PrintWaypointName), 0, 1f); // not doing what we want
     }
 
     // finds a path for the enemy to traverse
-    private void FindPath()
+    private void RecalculatePath(bool resetPath)
     {
-        path.Clear(); // make sure we only have one path
+        Vector2Int coordinates = new Vector2Int();
 
-        GameObject parent = GameObject.FindGameObjectWithTag("Path");
-
-        foreach (Transform child in parent.transform)
+        if (resetPath)
         {
-            Tile waypoint = child.GetComponent<Tile>();
-
-            if (waypoint != null)
-            {
-                path.Add(waypoint);
-            }
+            coordinates = pathFinder.StartCoordinates;
         }
+        else
+        {
+            coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
+        }
+
+        // this will stop the enemy from following the path while it finds a new one
+        StopAllCoroutines();
+        path.Clear(); // make sure we only have one path
+        path = pathFinder.GetNewPath(coordinates);
+        StartCoroutine(FollowPath());
     }
 
     // moves the enemy object to the beginning of the path
     private void ReturnToStart()
     {
-        transform.position = path[0].transform.position;
+        transform.position = gridManager.GetPositionFromCoordinates(pathFinder.StartCoordinates);
     }
 
     // moves the enemy object through the path 
     private IEnumerator FollowPath()
     {
         // prints the waypoints the enemy will follow
-        foreach (Tile waypoint in path)
+        for (int i = 1; i < path.Count; i++)
         {
             Vector3 startPosition = transform.position; // our current waypoint
-            Vector3 endPosition = waypoint.transform.position; // the waypoint we're going to
+            Vector3 endPosition = gridManager.GetPositionFromCoordinates(path[i].coordinates);
             float travelPercent = 0f;
 
             // we're always facing the waypoint we're moving towards
