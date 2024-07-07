@@ -1,0 +1,186 @@
+UNITY THIRD PERSON: COMBAT & TRAVERSAL
+
+Installation and Setup
+- Packaged we need
+---> Cinemachine
+---> Input System
+---> TextMeshPro
+---> Unity UI
+---> Universal RP
+---> Visual Studio Code Editor
+
+What is a state machine?
+- example state machine
+---> in Animator window to set which animation to play depending on any action
+- will be writing our own state machine
+- another example:
+---> Patrol -- Can see player --> Chase -- In Attack range --> Attack -- Attack finished --> Chase -- Lost the player --> Patrol 
+---> and start over
+- States
+---> what to do when in a particular state
+------> can separate everything out in their own state, and just makes it a lot easier to work with and maintain
+---> Called once upon entering a state: Enter();
+---> Called every frame when in a state: Tick();
+------> logic througout our state 
+------> like Update 
+---> Called once upon exiting a state: Exit();
+- Chase State example
+---> Enter();
+------> Play chase animation
+---> Tick();
+------> Move toward the player
+------> Keep checking distance to player and transition to attack if close enough or patrol if too far away
+---> Exit();
+------> N/A 
+
+Creating Our State Machine:
+- Unity Animator State Machine?
+---> designed with animation in mind
+---> can be in multiple states at once
+------> we don't want this, we want to finish one state first before entering another 
+- we don't have as much control compared to creating our own
+- abstract keyword
+---> stick it before class keyword to create an abstract class 
+---> it means you can't create a state, but can inherit it and create a jumping state, for example
+------> basically, creates template and methods can have their own definitions for the said methods
+---> can create abstract methods
+------> this means that any states have to have this method
+- State Inheritance:
+---> State: base abstract class
+---> EnemyBaseState and PlayerBaseState inherit from State class
+---> PlayerJumpingState and PlayerBlocking inherit from PlayerBaseState
+- State Machine Inheritance
+---> StateMachine: Base class
+---> EnemyStateMachine and PlayerStateMachine inherit from StateMachine
+---> StateMachine stores the current state that it's in and it has a way to switch between states 
+- State currentState
+---> currentState?.Tick(Time.deltaTime);
+------> ?: checks whether currentState is or isn't null (if it isn't, it runs the Tick() method)
+---------> it is called the null conditional operator
+---------> it won't work with MonoBehavior or script for object reference (just do normal if stmt)
+- Unity won't let us add an abstract class to a gameobject which is what we want for StateMachine
+
+Constructors and Inheritance:
+- if you hit F12 on inherited class (ClassName : InheritFromClassName), it takes you to that script
+- abstract keyword tells Unity we won't be writing the logic for our methods in that specific class/script
+- protected PlayerStateMachine stateMachine;
+---> protected: that means that only classes that inherit this class can access the stateMachine
+- constructors have the same name as the script/class they're in and don't have a return type
+
+Testing Player State Machine
+- hit ctrl + . when selecting ClassName when inheriting from an abstract class and choose implement abstract methods
+---> this writes all the abstract methods so we can implement them in our current script
+- constructor looks like this:
+---> public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) {}
+------> this basically takes care of the constructor
+------> base(stateMachine) calls the base class constructor and passes in the param stateMachine (this.stateMachine = stateMachine)
+------> this allows us to add more params to the constructor in current script
+- override methodType MethodInherited()
+---> override keyword allows us to have different definitions for the same method in different classes
+
+Creating an Action Map:
+- Go to root of Assets folder
+---> hit Create, scroll down to Input Actions
+---> what this asset does is simply tell Unity what buttons correlate with what actions
+- normally you would want different Actions maps because the player actions might be different for menu actions
+---> the same buttons might do different things for the menu and actual game
+
+Handling Inputs
+- we have a script InputReader to deal with player input
+---> InputReader : MonoBehaviour, Controls.IPlayerActions
+------> Controls.IPlayerActions is an interface (the I represents that it is an interface) because we can inherit from one class only
+- Contros controls = new Controls();
+---> controls.Player.SetCallbacks(this);
+------> Player is the Input Map name
+------> SetCallbacks(this) hooks controls with the method generated in the script (which is Jump - OnJump method)
+- Events
+---> things that are triggered whenever they happen as opposed to something you call, something you check every frame
+---> use the event keyboard followed by the type of event (such as Action)
+---> public event Action JumpEvent
+- public void OnJump(InputAction.CallbackContext context)
+---> method created using ctrl + . on Controls interface
+---> context param is used to check a few things, for example if the jump button is pressed
+- JumpEvent?.Invoke()
+---> use Invoke() method to invoke an event
+
+Input Events
+- public InputReader InputReader { get; private set; }
+---> this is a property
+---> it lets us publicly get the InputReader (using get;)
+---> however, we can only set it privately (using private set;)
+- [field: SerializeField] before above line lets you see the property in the editor
+---> use this to serialize a property ([SerializeField] only works on fields)
+- in PlayerTestState.cs
+---> stateMachine.InputReader.JumpEvent += Enter;
+------> stateMachine calls the InputReader jump event
+------> you subscribe to the event by += the method you want to call when the event (JumpEvent) is triggered (example, Enter)
+------> -= means you're unsubscribing to the event
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
