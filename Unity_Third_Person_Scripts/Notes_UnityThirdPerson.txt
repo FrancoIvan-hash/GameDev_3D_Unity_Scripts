@@ -116,7 +116,70 @@ Input Events
 ------> you subscribe to the event by += the method you want to call when the event (JumpEvent) is triggered (example, Enter)
 ------> -= means you're unsubscribing to the event
 
+Player Character
+- use Maximo.com to get character models
+- if the model is blank (no material)
+---> click on it, go to Material in inspector and change:
+------> Material Creation Mode : Standard (legacy)
+------> Location : Use External Materials (Legacy)
 
+Animator State Machine
+- search in Animations for locomotion
+---> get pack of animations
+- Attach Animator to player (or model that will be animated)
+- need Animation Controller in Animator for animations
+
+Movement Input
+- add Actions to Player Action Maps called Move
+---> Action Type: Value
+---> Control Type: Vector2
+---> this is because we want a value if we're moving WASD
+---> Vector2 because we're moving left or right, up or down
+- OnMove()
+---> MovementValue = context.ReadValue<Vector2>();
+---> the ReadValue<Vector2> gets the value when using WASD/Arrow keys or left stick and stores it in MovementValue
+
+Player Character Controller
+- Unity's component to handle player's collisions and movement within our world
+---> Slope Limit: how steep you can walk/move
+---> Skin Width: to handle collisions (Unity recommends it is 10% of the player's radius
+- Controller.Move(value for movement)
+---> Move() method is attached to Character Controller component that let us use our movement value to move our player 
+- Quaternion.LookRotation(position to look at)
+---> Quaternion is used for rotation
+---> LookRotation() sets where to look
+
+Movement Blend Tree
+- lets you lay out different animations and set it up so you can smoothly transition between them
+- stateMachine.Animator.SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime)
+---> access animator stored in stateMachine (PlayerStateMachine script)
+---> SetFloat() sets a parameter
+------> "FreeLookSpeed": param name
+------> 0: value of param (if 1, start another animation)
+------> 0.1f: smoothing value (dampTime) such that the animation doesn't just snap
+------> deltaTime: Time.deltaTime
+
+Cinemachine Camera
+- Orbiting, Height and Radius
+---> that's the three rings that change how high or low the camera can go
+- Axis Speed and Acceleration
+---> that's just how the camera feels to be controlled by the mouse or joystick
+- Aim settings
+---> to change the position of your character on the screen
+- add Cinemachine Collider in extensions so that the camera isn't blocked by something specified by the tag
+
+Camera Relative Movement
+- Normalize()
+---> normalizes a vector (such that player goes at a constant speed in any direction)
+- look at this lecture to learn outcome
+---> players moves relative to where the camera is
+
+Movement Refactoring
+- private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
+---> readonly: as soon as you have assigned it (variable) you cannot change it again
+---> StringToHash(string): takes a string and returns an integer (used for animator component/gameObject)
+---> "FreeLookSpeed" is the param name in Blend Tree
+- Quaternion.Lerp(currentRotation, destinationRotation, how fast or slow we get to our target)
 
 
 
