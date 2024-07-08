@@ -10,7 +10,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     // this is an event
     public event Action JumpEvent; // event for jumping action
-    public event Action DodgeEvent;
+    public event Action DodgeEvent; // event for dodge action
+    public event Action TargetEvent; // event for target action
+    public event Action CancelEvent; // event for cancel action
 
     private Controls controls;
 
@@ -53,5 +55,19 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnLook(InputAction.CallbackContext context)
     {
         // we don't actually use it in code, cinemachine component is using it for us so we don't need to store it
+    }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        TargetEvent?.Invoke();
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        CancelEvent?.Invoke();
     }
 }
