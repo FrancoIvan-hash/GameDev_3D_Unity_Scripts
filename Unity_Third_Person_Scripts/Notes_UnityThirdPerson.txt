@@ -181,6 +181,26 @@ Movement Refactoring
 ---> "FreeLookSpeed" is the param name in Blend Tree
 - Quaternion.Lerp(currentRotation, destinationRotation, how fast or slow we get to our target)
 
+Creating The Environment
+- if assets aren't displaying correctly, go to materials (for the prefabs/gameobjects)
+---> select material, Edit >> Rendering >> Materials >> Convert
+---> if some hasn't fixed yet: change shader to Universal Pipeline >> Lit
+
+Targeting
+- add a sphere collider to detect triggers (target other gameobjects)
+---> make sure you have a rigidbody attached to the gameobject so collisions work
+- TryGetComponent<ObjectType>(out ObjectType varName)
+---> it tries to get a component of type ObjectType
+---> returns a bool
+---> if it finds the ObjectType, it stores it in varName specified by out ObjectType varName
+
+Entering The Targeting State
+- writing events to target (and stop targetting)
+- switching between PlayerTargetingState and PlayerFreeLookState (both are scripts)
+---> set up input actions to press tab (escape) to target (stop targetting)
+
+
+
 
 
 
