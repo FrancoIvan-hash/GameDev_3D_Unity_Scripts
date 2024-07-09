@@ -208,6 +208,21 @@ Targeting Camera
 - Weight Option in TargetingGroup
 ---> it defines how close you look towards the first or second target
 
+State Driven Camera
+- this isn't a camera, but it manages the cameras that we have
+- public readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
+---> stateMachine.Animator.Play(FreeLookBlendTreeHash): plays the blend tree
+- the player rotation does affect how the switching camera looks
+
+Cinemachine Target Group
+- cineTargetGroup.AddMember(Transform, weight, radius)
+---> adds a target (of type Transform) to the list in Cinemachine Target Group
+- cineTargetGroup.RemoveMember(Transform)
+---> removes the member from the list
+- public event Action<Target> OnDestroyed;
+---> we do this <Target> because when we're invoking this event, we're actually passing some data (in this case which targed is destroyed)
+---> OnDestroyed?.Invoke(this): we need "this" because we're passing data (what we're destroying)
+
 
 
 
