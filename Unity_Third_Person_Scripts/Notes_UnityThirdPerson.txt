@@ -223,6 +223,18 @@ Cinemachine Target Group
 ---> we do this <Target> because when we're invoking this event, we're actually passing some data (in this case which targed is destroyed)
 ---> OnDestroyed?.Invoke(this): we need "this" because we're passing data (what we're destroying)
 
+Force Receiver
+- CharacterController controller; gives access to our character controller (to manipulate movement)
+---> controller.isGrounded checks whether or not the player is on the ground
+- Physics.gravity.y
+---> access the defined gravity in Unity (.y gets the y-axis value of gravity
+- Vector3 movement => Vector3.up * verticalVelocity
+---> => means that it returns whatever is on the right side
+
+Targeting Animations
+- float value = stateMachine.InputReader.MovementValue.y > 0 ? 1f : -1f;
+---> if conditional is true, value = 1f, else value = -1f
+
 
 
 
