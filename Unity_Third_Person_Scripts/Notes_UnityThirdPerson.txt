@@ -199,6 +199,14 @@ Entering The Targeting State
 - switching between PlayerTargetingState and PlayerFreeLookState (both are scripts)
 ---> set up input actions to press tab (escape) to target (stop targetting)
 
+Selecting A Target
+- select first target gameobject to target
+---> access from list
+
+Targeting Camera
+- add a Target Group camera from Cinemachine
+- Weight Option in TargetingGroup
+---> it defines how close you look towards the first or second target
 
 
 
