@@ -19,6 +19,13 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        // check if we're attacking
+        if (stateMachine.InputReader.IsAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+            return;
+        }
+
         // if we lose track of our target (through OnTriggerExit), switch state
         if (stateMachine.Targeter.CurrentTarget == null)
         {

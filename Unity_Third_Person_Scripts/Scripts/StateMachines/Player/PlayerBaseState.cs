@@ -11,6 +11,12 @@ public abstract class PlayerBaseState : State
         this.stateMachine = stateMachine;
     }
 
+    // this is when we want to move but with no input
+    protected void Move(float deltaTime)
+    {
+        Move(Vector3.zero, deltaTime);
+    }
+
     protected void Move(Vector3 motion, float deltaTime)
     {
         stateMachine.Controller.Move((motion + stateMachine.ForceReceiver.movement) * deltaTime);
