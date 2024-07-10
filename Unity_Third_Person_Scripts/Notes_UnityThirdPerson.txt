@@ -235,6 +235,38 @@ Targeting Animations
 - float value = stateMachine.InputReader.MovementValue.y > 0 ? 1f : -1f;
 ---> if conditional is true, value = 1f, else value = -1f
 
+Improved Targeting Selection
+- mainCamera.WorldToViewportPoint(target.transform.position)
+---> it returns where on the screen the target is
+- toCenter.sqrMagnitude
+---> magnitude returns the length of a vector (toCenter)
+---> sqrMagnitude is easier for the computer to compute 
+
+Player Attacking State
+- context.canceled
+---> checks if the player released a given button (action)
+
+Attack Data
+- stateMachine.Animator.CrossFadeInFixedTime(string animationName, float blendTime)
+---> this function plays an animation defined by the name in the Animator window
+---> the blendTime basically defines how long smooth the transition will be between this animation and it's stopping
+
+Combo Attacks
+- public int ComboStateIndex { get; private set; } = -1
+---> to know if we can combpo to our next attack
+---> can set a default like any other variable to this property
+- AnimatorStateInfo currentInfo = stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+---> gets the information for our current state from the animator window
+- ... GetNextAnimatorStateInfo(0)
+---> 0: is the layer index (base layer in animator window)
+---> gets the information for the next state from the animator window
+- add tag "Attack" to the Attack animations in Animator window to check in which animation we are 
+- stateMachine.Animator.IsInTransition(0)
+---> checks whether we're transitioning to a different animation in base layer
+- nextInfo.IsTag("Attack")
+---> checks if the next animation is of tag Attack
+- nextInfo.normalizedTime
+---> it returns how far through in this state we are
 
 
 
