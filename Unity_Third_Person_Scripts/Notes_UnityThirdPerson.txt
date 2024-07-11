@@ -268,6 +268,26 @@ Combo Attacks
 - nextInfo.normalizedTime
 ---> it returns how far through in this state we are
 
+Attacking Force
+- Vector3 impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag)
+---> impact: the knockback or other external forces acting on the player
+---> SmoothDamp() method gradually changes a vector to a desired goal over time
+------> impact: is the current force/position
+------> Vector3.zero: the desired Vector value we want impact to reach
+------> ref dampingVelocity: a Vector3 that keeps the value modified everytime this method gets called (ref means reference to modify Vector)
+------> drag: a float that defines the smoothing time (the time it will take to reach the desired value)
+
+Weapon Hitbox
+- add a capsule collider to weapon for the hitbox
+- we can call methods from the animator, but you can only call methods on the same level as the animator
+---> in our game, the animator is all the way on the root of the player
+- on the animator, add an event on the second (frame) where you want to enable the weapon hitbox
+---> do the same for the disable weapon hitbox 
+
+Dealing Damage
+- added two more scripts 
+---> one is for health and the other is to detect when the weapon collides with an object with the health script
+
 
 
 
