@@ -288,6 +288,46 @@ Dealing Damage
 - added two more scripts 
 ---> one is for health and the other is to detect when the weapon collides with an object with the health script
 
+Enemy Idle State
+- stateMachine.Animator.SetFloat(SpeedHash, 0f, 0.1f, deltaTime)
+---> this will set the blend tree param to 0 over the course of 0.1 seconds
+
+Player Detection
+- Player = GameObject.FindObjectWithTag("Player");
+---> since we're only running this line once in Start method, it's fine (we also only have one player)
+---> this line (because of tags) isn't very performant 
+- OnDrawGizmosSelected()
+---> built-in method in Unity
+---> we can draw in the editor a visualization of that range so we can see a kind of sphere that shows how far that ranges
+---> this actually doesn't appear in the game
+---> Gizmos.color = Color.red : this changes the color to red
+---> Gizmos.DrawWireSphere(transform.position, PlayerChasingRange)
+------> this draws a sphere around the transform.position (which is the enemy in our game)
+------> PlayerChasingRange is the radius of the sphere
+---> since this method is OnDrawGizmosSelected, it will only draw the sphere when a particular enemy is selected
+------> OnDrawGizmos() method makes it always visible
+
+Enemy Chasing State
+- if you have a terrain in your world
+---> make sure is static
+---> this allows the nav mesh system to mark out a path on the ground that our enemies can follow
+---> if it isn't static, then it's not sure that it's going to stay the same and it won't be able to make the path
+- use NashMesh system to bake a path 
+---> for something to use the navmesh, they need a navmesh agent component
+---> this can actually move our enemy for us but we don't want that
+---> navmesh agents aren't good at calculating gravity and knockback external forces, but to go from point A to B
+- NavMeshAgent Agent
+---> Agent.updatePosition = Agent.updateRotation = false
+------> this tells the navmesh agent to not move the enemy for us
+- stateMachine.Agent.destination = stateMachine.Player.transform.position;
+---> this tells the navmesh agent component where we want to go (which is towards the player)
+- stateMachine.Agent.desiredVelocity.normalized * stateMachine.MovementSpeed
+---> we don't want speed or acceleration values on the AI to change how we move
+---> that is why we normalize the desiredVelocity on the agent (and move according to our MovementSpeed) 
+- stateMachine.Agent.velocity = stateMachine.Controller.velocity;
+---> makes sure our agent stays in sync with our controller when the enemy is moving
+- stateMachine.Agent.ResetPath()
+---> resets the path of the agent when we're exiting the chasing state 
 
 
 
