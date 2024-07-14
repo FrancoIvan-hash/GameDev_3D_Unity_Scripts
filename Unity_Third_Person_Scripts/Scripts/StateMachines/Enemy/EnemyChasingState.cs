@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 
 public class EnemyChasingState : EnemyBaseState
@@ -48,9 +50,13 @@ public class EnemyChasingState : EnemyBaseState
 
     private void MoveToPlayer(float deltaTime)
     {
-        stateMachine.Agent.destination = stateMachine.Player.transform.position;
+        // isOnNavMesh : checks that the agent is enabled and they are on the navmesh
+        if (stateMachine.Agent.isOnNavMesh)
+        {
+            stateMachine.Agent.destination = stateMachine.Player.transform.position;
 
-        Move(stateMachine.Agent.desiredVelocity.normalized * stateMachine.MovementSpeed, deltaTime);
+            Move(stateMachine.Agent.desiredVelocity.normalized * stateMachine.MovementSpeed, deltaTime);
+        }
 
         // makes sure the AI stays in sync with the character controller, which moves the enemy
         stateMachine.Agent.velocity = stateMachine.Controller.velocity;

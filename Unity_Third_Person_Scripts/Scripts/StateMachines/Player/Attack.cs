@@ -17,4 +17,5 @@ public class Attack
     // how far through an attack will let you do another attack
     [field: SerializeField] public float ComboAttackTime { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public float Knockback { get; private set; }
 }
