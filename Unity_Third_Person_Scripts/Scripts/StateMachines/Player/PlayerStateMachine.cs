@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
@@ -17,7 +18,14 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float TargetingMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
+    [field: SerializeField] public float DodgeDuration { get; private set; }
+    [field: SerializeField] public float DodgeLength { get; private set; }
+    [field: SerializeField] public float DodgeCooldown { get; private set; }
+    [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public Attack[] Attacks { get; private set; }
+
+    // sets it to our smallest number so that our first dodge works
+    public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
 
     // variable to control camera 
     public Transform MainCameraTransform { get; private set; }
@@ -51,5 +59,10 @@ public class PlayerStateMachine : StateMachine
     private void HandleDie()
     {
         SwitchState(new PlayerDeadState(this));
+    }
+
+    public void SetDodgeTime(float dodgeTime)
+    {
+        PreviousDodgeTime = dodgeTime;
     }
 }
