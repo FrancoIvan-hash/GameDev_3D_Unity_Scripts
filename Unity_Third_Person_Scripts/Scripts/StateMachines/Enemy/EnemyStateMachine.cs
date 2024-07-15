@@ -12,6 +12,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public WeaponDamage Weapon { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Target Target { get; private set; }
+    [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
 
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float PlayerChasingRange { get; private set; }
@@ -19,11 +20,11 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public int AttackDamage { get; private set; }
     [field: SerializeField] public float AttackKnockback { get; private set; }
 
-    public GameObject Player { get; private set; }
+    public Health Player { get; private set; }
 
     private void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 
         // these two lines tells the AI nav mesh agent to not move our enemy for us
         Agent.updatePosition = false;

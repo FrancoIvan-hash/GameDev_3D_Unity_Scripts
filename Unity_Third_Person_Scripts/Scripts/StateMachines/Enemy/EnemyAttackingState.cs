@@ -24,6 +24,9 @@ public class EnemyAttackingState : EnemyBaseState
         {
             stateMachine.SwitchState(new EnemyChasingState(stateMachine));
         }
+
+        // this makes sure that the enemy is always facing the player when attacking
+        FacePlayer();
     }
 
     public override void Exit()

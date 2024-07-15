@@ -13,6 +13,9 @@ public abstract class EnemyBaseState : State
 
     protected bool IsInChaseRange()
     {
+        // if player is dead, enemy shouldn't chase player
+        if (stateMachine.Player.IsDead) { return false; }
+
         // the sqrMagnitude is more performant than magnitude
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
 

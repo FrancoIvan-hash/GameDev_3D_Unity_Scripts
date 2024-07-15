@@ -45,7 +45,8 @@ public class Targeter : MonoBehaviour
             Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
 
             // check whether the target is on the screen
-            if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1) { continue; }
+            //viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1
+            if (!target.GetComponentInChildren<Renderer>().isVisible) { continue; }
 
             Vector2 toCenter = viewPos - new Vector2(0.5f, 0.5f); // (0.5f, 0.5f) is the center of our screen
             if (toCenter.sqrMagnitude < closestTargetDistance)

@@ -27,6 +27,13 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
 
+        // check i f we're blocking
+        if (stateMachine.InputReader.IsBlocking)
+        {
+            stateMachine.SwitchState(new PlayerBlockingState(stateMachine));
+            return;
+        }
+
         // if we lose track of our target (through OnTriggerExit), switch state
         if (stateMachine.Targeter.CurrentTarget == null)
         {
