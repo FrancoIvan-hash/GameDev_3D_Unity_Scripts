@@ -49,6 +49,20 @@ Reminder of C# Fundamentals
 ------> Find componets in Awake()
 ------> Use components in Start()
 
+Render Pipeline and Assets
+- Unity Render Pipelines (a system that defines how your project is rendered)
+---> Built-in Render Pipeline (BiRP)
+---> Universal Render Pipeline (URP)
+------> runs on everything
+---> High Definition Render Pipeline (HDRP) 
+------> get the absolutely best visuals with tons and tons of options
+------> targeted at high-end PCs and high-end consoles
+---> should choose between URP and HDRP when creating a game
+
+Post Processing
+- added a bunch of Post-Processing stuff to make the visuals a bit better
+- might want to rewatch this lecture to remind myself how to do this
+
 2. UNIT MOVEMENT AND SELECTION
 
 3. GRID SYSTEM AND SELECTION
