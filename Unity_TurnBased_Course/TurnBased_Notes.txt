@@ -1,5 +1,54 @@
 1. INTRODUCTION AND SETUP
 
+Reminder of C# Fundamentals
+- Expectations for the course
+---> have some familiarity with basic coding concepts
+---> previously done at least some coding in Unity
+- Why this video?
+---> a quick reminder of key programming concepts
+---> a reference for what you should already know when diving into this course
+- Reminders on Syntax?
+---> Unity Documentation
+------> docs.unity3d.com
+---> Microsoft C# documentation
+------> docs.microsoft.com
+- Script Structure
+---> namespace UnityEngine
+-----> class OurClass
+-------> SomeMethod()
+---------> statements;
+---> classes can be nested inside a namespace
+---> classes generally contain a collection of methods
+---> methods contain statements and logic
+- MonoBehaviour
+---> Derives from the base Unity Object class
+---> allows you to add components to an object in the Unity inspector
+---> contains common methods like Start() and Update()
+- Scriptable Objects
+---> derives from the base Unity Object class
+---> actas a data container
+---> cannot be directly attached to a GameObject
+---> have to call it inside a Monobehaviour class to get it into the rest of our game
+- Jump Statements
+---> transfer control from one part to another
+-----> return : quits out of the method
+-----> break : stops the current loop or switch statement
+-----> continue : breaks from the current iteration of a loop
+- Collections
+---> collections contain elements
+---> elements are given an index within the collection
+---> counting starts at 0
+------> arrays = immutable collection with a fixed size
+--------> int[] myArray = new int[3];
+------> List = mutable collection with a variable size
+--------> List<int> myList = new List<int>()
+- Other Useful Reminders
+---> Time.deltaTime records the duration of the last frame and can be used to make your code framerate independent
+---> Script execution order controls the order in which methods are called
+---> There are no guarantees for the order in which classes are called, unless you explicitly set it!
+------> Find componets in Awake()
+------> Use components in Start()
+
 2. UNIT MOVEMENT AND SELECTION
 
 3. GRID SYSTEM AND SELECTION
