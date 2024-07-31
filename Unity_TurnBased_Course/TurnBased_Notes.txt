@@ -65,6 +65,137 @@ Post Processing
 
 2. UNIT MOVEMENT AND SELECTION
 
+Intro - Unit Movement and Selection
+- there's a really nice visual for this section
+- what we will learn
+---> Player: private float speed;
+------> OnSpeedChanged(): UI
+------> NoMethod(): UpgradeSystem
+------> SetSpeed(): Enemy
+------> SetDebuff(SlowSpeed): Enemy Boss
+
+Unity Base Setup
+- basically parenting the visuals to an empty gameobject
+---> separate logic from visuals
+---> the pivot should be at the bottom of the prefab (important for our game)
+
+Unit Move
+- Vector3.Distance(Vector3, Vector3)
+---> gets the distance between two vectors
+---> can use this function (with its returned value) to make sure your character stops a bit before its target position
+------> otherwise it will move back and forth between the target position and some weird offset
+
+Mouse Raycast
+- Input.mousePosition
+---> gets the position of our mouse in the scene in pixel coordinates
+- Raycast
+---> it's essentially a virtual laser from the camera 
+---> camera fires it and sees what it hits (anything that contains a collider)
+- nowadays you can directly use Camera.main without the need of caching it yourself
+---> Unity 2020 and above does the caching for you
+- Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+---> it returns a Ray going from the camera through a screen point
+- Physics.Raycast(ray)
+---> returns true if it hits something, false otherwise
+- how physics and raycast work
+---> raycast is looking for colliders, meaning it's looking for objects that exist in the physics world
+---> however, the physics wold is not necessarily the exact same as the visual world
+-----> meaning that the raycast only hits colliders regardless if there is a visual or not
+---> always remember that the Raycast is a physics function
+
+Mouse World Position
+- Physics.Raycast(ray, out RaycastHit raycastHit);
+---> if the ray hits something, the function returns all the info in raycastHit
+- layers in Unity is a nice way of categorizing objects
+---> it works especially well with the physics system
+- Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, mousePlaneLayerMask)
+---> float.MaxValue: biggest value to give to the raycast (we don't want to cut the raycast short)
+---> mousePlaneLayerMask is of typoe LayerMask
+------> just let use get the Layer that we made to specify the plane/floor that we want the raycast to register when hitting
+- public static GetPosition()
+---> static just means that this function is going to belong to the class itself and not any instance of the class
+- private static MouseWorld instance
+---> since we're only going to have a single most well-know instance in our world, we define it like that
+---> make sure we initialize instance to this in Awake
+- static should always be used sparringly
+---> they basically act as global state, which is always tricky and prone to mistake
+
+Public vs SerializeField Private
+- public
+---> the hall code space has access and modify 
+- private
+---> reduce complexity
+- the goal is to minimize access as much as possible
+---> thus, minimizing complexity
+
+Unit Click to Move
+- Input.GetMouseKeyDown(0)
+---> returns true if RMB was clicked
+
+Unit Animation Setup
+- visited Maximo.com
+---> downloaded Slim Shooter pack
+---> changed animation name, enabled loop time and changed Root Transform Rotation (to Original)
+
+Unit Animator
+- in Animator component attached to character
+---> Apply Root Motion: root motion is essentially movement that is baked directly into the animation itself
+- Has Exit Time in animation transition
+---> it will automatically transition to the other animation once the current animation finishes
+- if you drag the riffle to the scene and then you make it a child of the character, the scale won't change
+---> which is actually perfect 
+- instructor went over a bunch of stuff, so REWATCH IF NEEDED
+
+Unit Animator Parameters
+- Animator.SetBool("IsWalking", true);
+---> this method changes the value of our animator param (IsWalking)
+---> this enables us to make transitions between states (and thus, between animations)
+
+Unit Rotate When Moving
+- 3 Methods for Rotating Game Object
+---> transform.rotation
+------> if you're a fan of Quaternions, this is a great way of using them
+---> transform.eulerAngles
+------> they go from 0 to 360 degrees; alt -> you can use radians and do some math
+---> transform.forward
+------> easy to understand when dealing with vectors
+- since we already have a moveDirection vector, we can modify transform.forward pretty easy
+---> transform.forward = moveDirection;
+------> moveDirection = (targetPosition - transform.position).normalized;
+- transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime);
+---> smooth rotation using our current forward, moveDirection as our target position
+---> Time.deltaTime is used such that the player reaches its final rotation smoothly
+------> fixed: multiplied Time.deltaTime * rotateSpeed ( = 10f)  
+
+Unit Selection
+- similar to MouseWorld
+---> used a Raycast to check whether we hit something of Layer type Units
+---> if so, set selectedUnit to that 
+- we made sure that this script (UnitActionSystem) gets run before all the other scripts (because it has all our game logic)
+---> go into Project Settings >> Script Execution Order, and place script before Default Time
+
+Unit Selected Visuals, Events
+- Events
+---> You have publishers: event
+---> You have subscribers
+- This is called the Observers Pattern
+- public event EventHandler OnSelectedUnitChanged;
+---> this is our event
+---> EventHandler: it is C# standard
+---> public so that it can be accessed everywhere
+- OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
+---> this is how you fire an event
+---> ?. : checks that the event isn't null
+---> Invoke(this, EventArgs.Empty) basically tells that this fired the event and sends no argumets
+------> this is used because of EventHandler
+
+Unit Selected Visual, Singleton
+- public static UnitActionSystem Instance { get; private set; }
+---> it means that whatever we have in this class can be seen by other classes but not set
+- Instructor's rules on using Awake and Start
+---> use Awake to initialize things like the Singleton pattern
+---> use Start to get external references
+
 3. GRID SYSTEM AND SELECTION
 
 4. ACTIONS AND UI
