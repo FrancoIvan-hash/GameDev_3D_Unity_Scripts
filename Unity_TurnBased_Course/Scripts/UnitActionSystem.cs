@@ -25,6 +25,7 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        // if using LMB
         if (Input.GetMouseButtonDown(0))
         {
             // try handling the unit then return if succeeded
@@ -34,6 +35,7 @@ public class UnitActionSystem : MonoBehaviour
         }
     }
 
+    // select a unit when clicking 
     private bool TryHandleUnitSelection()
     {
         // do a ScreenPointToRay to get the mousePosition as a ray
@@ -56,14 +58,17 @@ public class UnitActionSystem : MonoBehaviour
 
     private void SetSelectedUnit(Unit unit)
     {
+        // Set selectedUnit
         selectedUnit = unit;
 
+        // Fire the event
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
     }
 
     // exposes the selectedUnit, but makes sure that it doesn't get modified
     public Unit GetSelectedUnit()
     {
+        // return our selectedUnit
         return selectedUnit;
     }
 }
