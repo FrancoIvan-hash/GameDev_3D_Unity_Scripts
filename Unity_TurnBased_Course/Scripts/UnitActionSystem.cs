@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UnitActionSystem : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class UnitActionSystem : MonoBehaviour
     {
         if (isBusy) { return; }
 
+        if (EventSystem.current.IsPointerOverGameObject()) { return; }
+
         if (TryHandleUnitSelection()) { return; }
 
         HandleSelectedAction();
@@ -46,21 +49,12 @@ public class UnitActionSystem : MonoBehaviour
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
-            switch (selectedAction)
+            if (selectedAction.IsValidActionGridPosition(mouseGridPosition))
             {
-                case MoveAction moveAction:
-                    if (moveAction.IsValidActionGridPosition(mouseGridPosition))
-                    {
-                        SetBusy();
-                        // move the current selected unit
-                        moveAction.Move(mouseGridPosition, ClearBusy);
-                    }
-                    break;
-                case SpinAction spinAction:
-                    SetBusy();
-                    spinAction.Spin(ClearBusy);
-                    break;
+                SetBusy();
+                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
             }
+
         }
     }
 
@@ -88,6 +82,11 @@ public class UnitActionSystem : MonoBehaviour
                 // try to get the Unit component of whatever we hit
                 if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
                 {
+                    if (unit == selectedUnit)
+                    {
+                        // this unit is already selected
+                        return false;
+                    }
                     // set the selectedUnit to the unit we hit when casting a Raycast
                     SetSelectedUnit(unit);
                     return true;
@@ -115,9 +114,7 @@ public class UnitActionSystem : MonoBehaviour
     }
 
     // exposes the selectedUnit, but makes sure that it doesn't get modified
-    public Unit GetSelectedUnit()
-    {
-        // return our selectedUnit
-        return selectedUnit;
-    }
+    public Unit GetSelectedUnit() => selectedUnit;
+
+    public BaseAction GetSelectedAction() => selectedAction;
 }
