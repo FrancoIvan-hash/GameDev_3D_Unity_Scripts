@@ -325,6 +325,21 @@ Unit Action System UI
 - ToUpper()
 ---> sets all characters in a string in uppercase 
 
+Click UI to Select Action
+- button.onClick.AddListener()
+---> this is how you seet up the conditions for what actions a button takes when clicked
+---> do this through code because the buttons get instantiated (they don't exist in our world permanently)
+- button.onClick.AddListener(() =>
+        {
+            // code
+        });
+---> this is an anonymous function (also called a Lambda Expression)
+---> a function that gets defined as a parameter
+---> we do this here because of delegates
+
+Generic Take Action
+- 
+
 5. ENEMIES AND COMBAT ( 2h 35m )
 
 6. PATHFINDING ( 1h 50m )
