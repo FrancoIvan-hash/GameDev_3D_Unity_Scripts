@@ -284,7 +284,46 @@ Base Action Class
 ---> we want to create instances of all of our actions which extend this class, but don't ever want to instantiate base class directly
 
 Single Active Action
-- 
+- Delegates
+---> just pretty much a way to store functions in a field or parameter
+---> all you need is a delegate type and make a field of that type
+- public delegate void SpinCompleteDelegate();
+---> simple delegate definition
+- private SpinCompleteDelegate onSpinComplete;
+---> this is how you define a type of that delegate to store a reference
+---> onSpinComplete() : how you call the delegate
+- Action is a built-in delegate
+---> many types of that
+---> returns void
+- Func
+---> another built-in delegate
+---> returns any value you want 
+- changed our define delegate to Action
+- refactored code
+---> defined delegate in BaseAction class 
+
+UI Setup
+- changed canvas scaler to scale with screen size 
+---> used 1280 x 720 resolution
+---> match complete height
+---> recommended settings for a Desktop game
+
+Unit Action System UI
+- on a button in the canvas
+---> Outline component to add an outline around the button
+---> Shadow component to add a shadow for the button
+- Grid Layout Group component 
+---> it aligns everything you have as a group nicely
+---> you can change settings to adjust as you like
+- error when destroying a Transform (transformObject)
+---> so destroy transformObject.gameObject
+- TextMeshProUGUI vs TextMeshPro
+---> TextMeshPro is for world objects 
+---> TextMeshProUGUI is for UI objects
+- public abstract string GetActionName();
+---> we're forcing all child classes to implement this function
+- ToUpper()
+---> sets all characters in a string in uppercase 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
 
