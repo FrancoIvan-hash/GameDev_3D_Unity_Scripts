@@ -247,6 +247,15 @@ Camera Move and Rotate
 - Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
 ---> this makes sure to update movement according to the rotation of the cameracontroller
 
+Camera Zoom
+- private CinemachineVirtualCamera cinemachineVirtualCamera;
+---> you can get accessed to the cinemachine virtual camera
+- CinemachineTransposer cinemachineTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+---> CinemachineTransposer is the type of body in cinemachine virtual camera
+---> GetCinemachineComponent<CinemachineTransposer>() gets the body component of the virtual camera (CinemachineTransposer)
+- cinemachineTransposer.m_FollowOffset
+---> gets accessed to the follow offset in the body component in the cinemachine virtual camera
+
 4. ACTIONS AND UI
 
 5. ENEMIES AND COMBAT
