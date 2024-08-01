@@ -258,6 +258,13 @@ Camera Zoom
 
 4. ACTIONS AND UI
 
+Move Action
+- rewatch lecture
+
+Move Action Validate
+- added a bunch of validations
+---> rewatch lecture
+
 5. ENEMIES AND COMBAT
 
 6. PATHFINDING
