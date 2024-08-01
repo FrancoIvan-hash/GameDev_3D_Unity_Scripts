@@ -198,6 +198,50 @@ Unit Selected Visual, Singleton
 
 3. GRID SYSTEM AND SELECTION
 
+Grid System
+- our grid system will be a pure C# script
+---> removed MonoBehaviour
+---> we want to make our own constructor to init values in our class
+- Debug.DrawLine()
+---> a great debugging function to draw a simple line
+---> it takes a start and end vector
+---> it also takes a Color and a duration (how long should the line be visible for)
+- public struct GridPosition
+---> this struct will store the values for the grid (x and z position values)
+---> this is a struct instead of a class because:
+------> struct is a value-type 
+---------> you're working with copies of the values (you don't change the original)
+------> class is a reference-type  
+---------> you're working with class references (you change the original)
+- All functions/structs have a ToString() method and you can override it
+---> public override string ToString()
+---> this will be how you ToString your customized struct
+- Mathf.RoundToInt()
+---> methods rounds a float value to an int value
+
+Grid Object
+- GridObject[,] gridObjectArray;
+---> [,] : this is how you define a 2D array
+- you can interchange between Transform and GameObject
+---> every GameObject has a Transform
+---> every Transform has to be attached to a GameObject
+---> we use a 2D array to store a GridObject because we want to instantiate it right in the middle of the grid/cell
+
+Grid Object Debug
+- rewatch lecture
+
+Level Grid
+- public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
+---> => is a shorthand for { return gridSystem.GetGridPosition(worldPosition); }
+---> basically implementing a one-line function
+---> this is called a Lambda Expression
+- public static bool operator ==(GridPosition a, GridPosition b) => a.x == b.x && a.z == b.z;
+---> this is how you define an operator for a custom struct
+---> for a == operator, you must have a != operator definition as well
+- IEquatable<GridPosition>
+---> this is a topic about interfaces and generics
+---> we're typing this next to GridPosition to implement a struct as perfect as it can be
+
 4. ACTIONS AND UI
 
 5. ENEMIES AND COMBAT
