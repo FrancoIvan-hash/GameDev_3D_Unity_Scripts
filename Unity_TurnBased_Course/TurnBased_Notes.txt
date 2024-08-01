@@ -242,6 +242,11 @@ Level Grid
 ---> this is a topic about interfaces and generics
 ---> we're typing this next to GridPosition to implement a struct as perfect as it can be
 
+Camera Move and Rotate
+- used transform.eulerAngles to change the rotation of the camera
+- Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
+---> this makes sure to update movement according to the rotation of the cameracontroller
+
 4. ACTIONS AND UI
 
 5. ENEMIES AND COMBAT
