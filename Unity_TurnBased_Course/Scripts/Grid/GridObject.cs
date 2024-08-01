@@ -42,4 +42,9 @@ public class GridObject
         return gridPosition.ToString() + "\n" + unitString;
     }
 
+    public bool HasAnyUnit()
+    {
+        return unitList.Count > 0;
+    }
+
 }
