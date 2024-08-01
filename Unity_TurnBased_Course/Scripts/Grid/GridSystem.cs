@@ -74,4 +74,8 @@ public class GridSystem
                 gridPosition.x < width &&
                 gridPosition.x < height;
     }
+
+    public int GetWidth() => width;
+
+    public int GetHeight() => height;
 }
