@@ -270,6 +270,20 @@ Grid Visual
 ---> rewatch lecture if needed
 
 Base Action Class
+- protected Unit unit;
+---> protected is similar to private since no external classes can modify them or access them
+---> however, only those that inherit from this class can access them
+- protected virtual void Awake() { }
+---> protected such that any child classes can access it
+---> virtual such that those child classes can override it
+- protected override void Awake() { base.Awake(); // your code }
+---> protected override in the child class lets it override the method from the parent class
+---> base.Awake() runs the code in the parent class and the child class can add more code after it
+- public abstract class BaseAction : MonoBehaviour { }
+---> abstract keyword basically doesn't let us create an instance of this class
+---> we want to create instances of all of our actions which extend this class, but don't ever want to instantiate base class directly
+
+Single Active Action
 - 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
