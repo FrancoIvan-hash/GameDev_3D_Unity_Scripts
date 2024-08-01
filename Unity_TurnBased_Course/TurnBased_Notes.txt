@@ -338,6 +338,11 @@ Click UI to Select Action
 ---> we do this here because of delegates
 
 Generic Take Action
+- EventSystem.current.IsPointerOverGameObject()
+---> tests whether our UI button is over another UI button
+- rewatch lecture
+
+Selected Action UI Visual
 - 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
