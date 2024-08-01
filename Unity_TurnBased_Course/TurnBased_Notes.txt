@@ -256,7 +256,7 @@ Camera Zoom
 - cinemachineTransposer.m_FollowOffset
 ---> gets accessed to the follow offset in the body component in the cinemachine virtual camera
 
-4. ACTIONS AND UI (2h 5m remaining)
+4. ACTIONS AND UI
 
 Move Action
 - rewatch lecture
@@ -264,6 +264,13 @@ Move Action
 Move Action Validate
 - added a bunch of validations
 ---> rewatch lecture
+
+Grid Visual
+- added a nice visual to show which grid position the Unit is allowed to move to
+---> rewatch lecture if needed
+
+Base Action Class
+- 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
 
