@@ -343,6 +343,12 @@ Generic Take Action
 - rewatch lecture
 
 Selected Action UI Visual
+- rewatch lecture
+
+Action Busy UI
+- rewatch lecture
+
+Action Points
 - 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
