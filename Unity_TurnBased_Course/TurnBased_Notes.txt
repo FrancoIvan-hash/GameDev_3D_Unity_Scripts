@@ -349,6 +349,9 @@ Action Busy UI
 - rewatch lecture
 
 Action Points
+- rewatch lecture
+
+Turn System
 - 
 
 5. ENEMIES AND COMBAT ( 2h 35m )
