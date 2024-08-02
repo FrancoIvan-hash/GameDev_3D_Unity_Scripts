@@ -352,7 +352,9 @@ Action Points
 - rewatch lecture
 
 Turn System
-- 
+- public static event EventHandler OnAnyActionPointsChanged;
+---> we're adding a static event to make sure we always update the actions points
+---> the action points are updated visually so we want to avoid issues when scripts are compiled/run in a random order
 
 5. ENEMIES AND COMBAT ( 2h 35m )
 
