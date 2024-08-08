@@ -1,0 +1,36 @@
+Unity RPG Core Combat: Make Your Own RPG Combat System
+
+1. Intro and Setup
+
+DONE
+
+2. Basis Movement
+
+Create a Simple Sandbox
+- imported Synty Studios sandbox and terrain textures
+- created a simple terrain and place prefabs all over 
+---> painted terrain as well
+
+Move Using Nav Mesh Agent
+- 
+
+3. High Level Game Design
+
+4. Basic Combat
+
+5. Enemy AI
+
+6. First Moment
+
+7. Scene Management
+
+8. Saving Asset Pack
+
+9. Saving System
+
+10. Simple Weapons
+
+11. Character Stats
+
+12. Final Polish
+
