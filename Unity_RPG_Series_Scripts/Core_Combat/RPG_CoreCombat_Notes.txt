@@ -12,11 +12,169 @@ Create a Simple Sandbox
 ---> painted terrain as well
 
 Move Using Nav Mesh Agent
-- 
+- need to install AI from package manager
+- place a gameObject called NavMesh Surface and bake surface in Inspector
+- attach NavMeshAgent component to desired gameobject that will be moved using NavMesh
+- NavMeshAgent has a destination property
+
+Refining Your Nav Mesh
+- looked at the settings we can tweak in the navmesh surface to improve it
+- make sure objects that you don't want to be marked as walkable by navmesh are set to Static
+
+Introduction To Raycasting
+- what is Raycasting?
+---> Raycasting is the process of shooting an invisible ray from a point, in a specified direction, to detect whether 
+---> ... any colliders lay in the path of the ray.
+- to get where we click in the world
+---> Ray lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+- Debug.DrawRay(lastRay.origin, lastRay.direction * 100);
+---> draws the ray
+---> lastRay.origin is where the ray got shot from (camera)
+---> lastRay.direction is the direction of the ray
+
+Implement Click-To-Move
+- CTRL + Shift + SPACE 
+---> shows all signatures of a selected method
+- Ray, RaycastHit (has a property called point, which is where we hit)
+
+Create a Fixed Follow Camera
+- created empty gameObject (FollowCamera) and attached main camera to it
+- wrote a script so that FollowCamera moves with Player
+
+Animation Blend Trees
+- Terminology
+---> Animator Component: 
+------> Assigns animations to GameObjects through an Animator Controller
+---> Animator Controller:
+------> Arrangement of animations and transitions (state machine)
+---> Animation:
+------> Specific pieces of motion
+---> Blend Tree
+------> Allows multiple animations to be blended together smoothly
+
+Match Animation To Movement
+- in Animator component attached to Player
+---> connect Controller and Avatar (character that we're using to animate)
+---> make sure Apply Root Motion is checked off so that the animator doesn't controll Player/Character movements
+- Some Context
+---> Velocity = rate of change of position over time
+------> ie. Speed and direction
+------> e.g. Car travelling North at 50 km/h
+---> The NavMeshAgent is thinking in terms of velocity - direction to move and speed to travel there
+---> Our character's locomotion animations are only interested in forward speed (along z axis)
+- Therefore Our Goal
+---> Get the global velocity from NavMeshAgent
+---> Convert this into a local value relative to the character
+---> Set the animator blend value to be equal to our desired forward speed (on the Z axis)
+- change rotation speed (so that animation looks better) in NavMeshAgent component
+---> change angular speed and acceleration
+
+Basic Movement Tweaks
+- Continuous Clock-To-Move
+---> changed the behaviour so the player can hold down LMB to continuously move
+---> from Input.GetMouseButtonDown(0) to Input.GetMouseButton(0)
+- FolloCamera.cs
+---> changed Update to LateUpdate so that there's no error in order of execution
+---> means that we want the camera to follow the player after the player moves (and not be changing what moves first)
 
 3. High Level Game Design
 
+High Level Design
+- how this game differentiate from other games
+- think about what you want your game to be aboud
+
+1.5 Page Game Design Document
+- RPG Game Design Is A Battle...
+---> your epic imagination vs your realistic limitations
+- Think Big, Start Small
+---> start by creating a simple gameplay moment
+- set your creative direction
+---> complete the first section of the 1.5 page GDD
+---> add 2 images that summarize what your game is about
+---> create a simple 1 line summary of your game
+
+The Player Experience
+- why do people like playing games?
+---> what they will say
+------> it's fun
+------> I'm good at it
+------> the graphics look great
+---> what they actually mean
+------> it made me feel a certain way
+------> it game me an interesting experience
+- the best games give a player a consistent experience throughout the game
+- most important high level design
+---> to create a very specific and consistent player experience
+- 3 ways to express player experience
+---> make the player feel "like a type of person"
+---> make the player feel "a certain emotion"
+---> give the player the same feeling as "doing a certain activity" 
+- Makes decision making easier
+---> the best games create a CONSISTENT experience in every aspect of the game
+------> art
+------> gameplay
+------> audio
+------> story
+------> marketing
+---> if in doubt, do whatever will create the experience you're aiming for
+
+First Draft Of Your GDD
+- writing idea for game in Docs
+
 4. Basic Combat
+
+Section Overview
+- Click to attack
+- Animations
+- Repeat attacking
+- Damage dealing
+- Death 
+
+Separating The Control Layer
+- CTRL + / to comment a selected block of code
+---> use samea method to uncomment
+
+Namespaces To See Dependencies
+- Dependencies are evil
+---> something might break if a namespace/feature changes which is used by other features/scripts
+- Cycles are worse
+---> circular dependency
+---> this might even change the feature that we change in the first place
+- Layering
+---> more stability the lower something is in the layering system
+- Cohesion
+---> try to be related to each other as much as possible
+
+Raycasting For Components
+- come back for notes
+
+Implementing Action Priority
+- come back for notes
+
+Move Within Range
+- NavMeshAgent.isStopped 
+---> a boolean property that stops the navmeshagent 
+
+Cancelling Combat With Movement
+-
+
+Decoupling Dependency Cycles
+-
+
+Dependency Inversion With Interfaces
+-
+
+Add Attack Animation
+- 
+
+Trigger Animation In Code
+-
+
+Throttlig Our Attacks
+- 
+
+Taking Damage
+- 
 
 5. Enemy AI
 
