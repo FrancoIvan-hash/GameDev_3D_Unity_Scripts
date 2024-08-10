@@ -11,7 +11,7 @@ namespace RPG.Combat
         [SerializeField] private float weaponDamage = 5f;
 
         private Health target;
-        private float timeSinceLastAttack = 0;
+        private float timeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
@@ -57,13 +57,13 @@ namespace RPG.Combat
             target.TakeDamage(weaponDamage);
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             target = combatTarget.GetComponent<Health>();
             GetComponent<ActionScheduler>().StartAction(this);
         }
 
-        public bool CanAttack(CombatTarget combatTarget)
+        public bool CanAttack(GameObject combatTarget)
         {
             if (combatTarget == null) { return false; }
 
