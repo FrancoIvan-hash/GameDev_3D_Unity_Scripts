@@ -156,27 +156,142 @@ Move Within Range
 ---> a boolean property that stops the navmeshagent 
 
 Cancelling Combat With Movement
--
+- Short-Circuit Operators
+---> FirstFunction() && SecondFunction()
+------> will evaluate FirstFunction first and then SecondFunction if needed
+------> if FirstFunction returns false, then it instantly returns false
+---> First() || Second()
+------> if First is true, it returns true without evaluating the Second() 
 
 Decoupling Dependency Cycles
--
+- we had a circular dependency with combat and movement (both depended on each other)
+- Breaking the Knot
+---> Movement depends on Combat
+---> Combat depends on Movement
+---> will introduce Schedular to deal with mutual dependency
+- Substitution Principle
+---> when you inherit from something, you have to behave exactly like that thing
+---> example: Missile class
+------> Missile: it has to be pointed at a direction and launched
+------> Bullet: it inherits from Missile, so it must be able to be pointed at a direction and launched
+------> this is true for an arrow, and rocket as well
+---> be able to pass in something without knowing what it actually is
+---> you can always substitute a derived type, a type that inherits from the parent type instead of the parent type
 
 Dependency Inversion With Interfaces
--
+- Return to Cycles
+---> Scheduler can depend on both Movement and Combat
+- Dependency Inversion
+---> introducing Interfaces
+---> change Scheduler calling Movement and/or Combat, to Movement/Combat calling to Interface (connected to Scheduler)
+- IAction
+---> this is an interface
+---> it is a contract between the implementer of the contract and the caller of the contract
+------> Implementer: Movement and Combat
+------> Caller: Scheduler
+---> Thus, Scheduler will depend on IAction
+- public interface IAction { }
+---> this means that we can say that anything that implements this interface (Movement and Combat) has to have a certain method
+---> can only put methods or properties but not implement them  
+- removed Movement depending on Combat by implementing this interface
 
 Add Attack Animation
-- 
+- imported animations 
 
 Trigger Animation In Code
--
+- GetComponent<Animator>().SetTrigger("attack");
 
 Throttlig Our Attacks
-- 
+- triggers in animation
+---> it's like a boolean
+---> however, it goes back to false after the transition has happened
+- Time.deltaTime
+---> gives us the time since last rendered (or since the last time update was called)
 
 Taking Damage
-- 
+- adding Health script component to Enemy prefab
+
+Nested Prefabs
+- Prefabs
+---> a collection of GameObjects (it has a hierarchy)
+---> each GameObject has a bunch of components under it
+---> under each component, you have a bunch of property overrides
+- CTRL + Shift + F
+---> to search in all projects (in VSCode)
+- CTRL + F
+---> to search in the file
+- Nesting
+---> instead of putting a gameobject in the hierarchy, it will put a prefab instance
+---> that prefab instance will reference another prefab
+- if you make a change to the prefab instance inside the parent prefab, it won't apply it to the original prefab instance
+----> unless you hit apply
+- Variants
+---> they are like nested prefabs
+---> however, the whole prefab is really just a pointer to a different prefab with a list of modifications
+
+Using Prefab Variants
+- come back for notes
+
+Any State Animations
+- come back for notes
+
+Trigger Death Animation
+- come back for notes
+
+Stop Attacking Already
+- [RequireComponent(typeof(Health))]
+---> makes sure that whatever adds the current component, the component specified above also gets added
+- added a new trigger and changed a few things in Healt.cs and Fighter.cs
+
+Look Them In The Eyes
+- How to know when to move on to next feature?
+---> in early development, don't get stuck on one feature
+---> move on to next thing when you can pass this test:
+------> "Is there anything about this feature which is distracting or broken?"
+- last bit of twiddling for basic combat
+---> change player slightly, more handsome
+---> make player look at the enemies when thumping them
+---> make sure that the dead don't interfere with thumping
+- Transform.LookAt()
+---> rotates the transform so the forward vector points at target's current position
+
+Ignore Dead Enemies
+- implemented a CanAttack method that help us ignore dead enemies when doing a RaycastHit
+
+Bugs? What Bugs?
+- what is a bug?
+---> when you game doesn't work as intended
+- when to fix different types of bugs
+---> game breaking - stops game from working
+------> drop everything, fix immediately
+---> annoying - player will be distracted
+------> fix before moving on to next feature
+---> looks bad - player will notice
+------> fix if you get time
+---> could be improved - player may or may not know
+------> not a bug! add it to your "polish" list for end of project
+- Process For Fixing Bugs
+---> be very clear on the repro (reproduction) steps
+---> follow your code's logic step-by-step and ask "what exactly is this step doing?"
+---> look for:
+------> doing the wrong thing
+------> doing additional things
+------> not actually doing the thing
+---> alter the code
+---> test the repro steps and general gameplay
+- Used ResetTrigger() to reset any triggers
+---> there was a bug where StopAttack trigger wouldn't be fully consumed which led to attacking looking weird
 
 5. Enemy AI
+
+Section Overview
+- Feature List
+---> Chase radius
+---> Aggression behaviour
+---> Gizmos
+---> Suspicion
+---> Guarding
+---> Patrol route
 
 6. First Moment
 
