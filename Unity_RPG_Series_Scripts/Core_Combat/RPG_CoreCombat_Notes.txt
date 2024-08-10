@@ -293,7 +293,75 @@ Section Overview
 ---> Guarding
 ---> Patrol route
 
+Swappable Control System
+-
+
+Disable Control When Dead
+- 
+
+Visualising With Gizmos
+- private void OnDrawGizmosSelected()
+---> Gizmos.color = Color.blue;
+---> Gizmos.DrawWireSphere(Vector3 center/position, float radius)
+
+AI Guarding Behaviour
+- com back for notes
+
+That's Some Suspicious Behaviour
+- come back for notes
+
+Visualising Waypoints
+- transform.childCount
+---> gets the number of children in a parent gameObject
+- transform.GetChild(int)
+---> gets the child from parent
+
+Waypoint Loops
+- come back for notes
+
+Patrolling Behaviour
+- come back for notes
+
+Dwelling At Waypoints
+- come back for notes
+
 6. First Moment
+
+Section Overview
+-
+
+Design A Moment
+-
+
+Sketch Your Moment
+-
+
+Tips To Improve Workflow
+-
+
+Craft The Environment
+-
+
+Hits-To-Kill Design Metric
+-
+
+Tweak Enemy Patrol
+-
+
+Cinemachine Follow Camera
+-
+
+Make Cinematic Sequence
+-
+
+Trigger Cinemachine Cutscene
+-
+
+The Observer Pattern In C#
+-
+
+Player Input In Cutscenes
+- 
 
 7. Scene Management
 
